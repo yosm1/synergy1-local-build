@@ -1,0 +1,16 @@
+{
+  "synergy.exe": {
+    "architecture": "x64",
+    "exitCode": 0,
+    "stdout": "initial language: zh_CN\nSynergy: 1.22.3-dev+a6281479\nCopyright (C) 2012-2026 Synergy App Ltd\nCopyright (C) 2009-2012 Nick Bolton\nCopyright (C) 2002-2009 Chris Schoeneman",
+    "stderr": ""
+  },
+  "synergy-core.exe": {
+    "architecture": "x64",
+    "exitCode": 0,
+    "stdout": "synergy-core.exe v1.22.3-dev+a6281479, based on Deskflow v1.26, protocol v1.8\nCopyright (C) 2012-2026 Synergy App Ltd\nCopyright (C) 2009-2012 Nick Bolton\nCopyright (C) 2002-2009 Chris Schoeneman",
+    "stderr": ""
+  },
+  "zipCRC": "passed",
+  "finalPackageTestedBinaryMatches": 28
+}

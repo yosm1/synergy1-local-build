@@ -1,0 +1,6 @@
+*.msi
+*.dmg
+*.zip
+.serena/
+build/
+*.log

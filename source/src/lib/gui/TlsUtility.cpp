@@ -1,0 +1,138 @@
+/*
+ * Deskflow -- mouse and keyboard sharing utility
+ * SPDX-FileCopyrightText: (C) 2025 Deskflow Developers
+ * SPDX-FileCopyrightText: (C) 2024 Synergy App Ltd
+ * SPDX-License-Identifier: GPL-2.0-only WITH LicenseRef-OpenSSL-Exception
+ */
+
+#include "TlsUtility.h"
+
+#include "common/Settings.h"
+#include "net/SecureUtils.h"
+
+#include <QDebug>
+#include <QFile>
+#include <QSslCertificate>
+#include <QSslKey>
+#include <QString>
+
+namespace deskflow::gui::TlsUtility {
+
+bool isEnabled()
+{
+  return Settings::value(Settings::Security::TlsEnabled).toBool();
+}
+
+bool isCertValid(const QString &certPath)
+{
+  const auto certs = QSslCertificate::fromPath(certPath);
+  if (certs.isEmpty()) {
+    //: %1 will be replaced by the certificate path
+    qDebug() << QObject::tr("failed to read key from certificate file: %1").arg(certPath);
+    return false;
+  }
+
+  const auto cert = certs.first();
+  if (cert.isNull()) {
+    //: %1 will be replaced by the certificate path
+    qDebug() << QObject::tr("failed to parse certificate file: %1").arg(certPath);
+    return false;
+  }
+
+  const auto key = cert.publicKey();
+  if (key.isNull()) {
+    //: %1 will be replaced by the certificate path
+    qDebug() << QObject::tr("failed to read key from certificate file: %1").arg(certPath);
+    return false;
+  }
+
+  if (key.length() != Settings::value(Settings::Security::KeySize).toInt()) {
+    qDebug() << QObject::tr("key detected is the incorrect size");
+    return false;
+  }
+
+  if (key.algorithm() != QSsl::Rsa) {
+    //: %1 will be replaced by the certificate path
+    qDebug() << QObject::tr("failed to read RSA key from certificate file: %1").arg(certPath);
+    return false;
+  }
+
+  return true;
+}
+
+int getCertKeyLength(const QString &certPath)
+{
+  QFile file(certPath);
+  if (!file.open(QFile::ReadOnly)) {
+    //: %1 will be replaced by the certificate path
+    qDebug() << QObject::tr("failed to read key from certificate file: %1").arg(certPath);
+    return -1;
+  }
+
+  const auto key = QSslKey(&file, QSsl::Rsa);
+  if (key.isNull()) {
+    //: %1 will be replaced by the certificate path
+    qDebug() << QObject::tr("failed to parse certificate file: %1").arg(certPath);
+    return -1;
+  }
+  return key.length();
+}
+
+QByteArray certFingerprint(const QString &certPath)
+{
+  QByteArray fingerprint;
+
+  const auto certs = QSslCertificate::fromPath(certPath);
+  if (certs.isEmpty()) {
+    //: %1 will be replaced by the certificate path
+    qDebug() << QObject::tr("failed to read key from certificate file: %1").arg(certPath);
+    return fingerprint;
+  }
+
+  const auto cert = certs.first();
+  if (cert.isNull()) {
+    //: %1 will be replaced by the certificate path
+    qWarning() << QObject::tr("failed to parse certificate file: %1").arg(certPath);
+    return fingerprint;
+  }
+
+  return cert.digest(QCryptographicHash::Sha256);
+}
+
+bool generateCertificate(int keyLength)
+{
+  qDebug(
+      "generating tls certificate, "
+      "all clients must trust the new fingerprint"
+  );
+
+  const auto certPath = Settings::value(Settings::Security::Certificate).toString();
+
+  QFileInfo info(certPath);
+  if (QDir dir(info.absolutePath()); !dir.exists() && !dir.mkpath(".")) {
+    //: %1 will be replaced by the directory the certificate would be written to
+    qCritical().noquote() << QObject::tr("failed to create directory for tls certificate: %1").arg(info.absolutePath());
+    return false;
+  }
+
+  if (info.exists()) {
+    const auto oldPath = certPath + QStringLiteral(".old");
+    QFile::remove(oldPath);
+    if (!QFile::rename(certPath, oldPath)) {
+      qCritical("failed to move existing tls certificate to: %s", qUtf8Printable(oldPath));
+      return false;
+    }
+    qInfo("moved existing tls certificate to: %s", qUtf8Printable(oldPath));
+  }
+
+  try {
+    deskflow::generatePemSelfSignedCert(certPath, std::max(2048, keyLength));
+  } catch (const std::exception &e) {
+    qCritical() << "failed to generate self-signed pem cert:" << e.what();
+    return false;
+  }
+  qDebug("tls certificate generated");
+  return true;
+}
+
+} // namespace deskflow::gui::TlsUtility

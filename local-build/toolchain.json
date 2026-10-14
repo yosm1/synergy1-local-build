@@ -1,0 +1,20 @@
+{
+  "created": "2026-10-14",
+  "root": "D:\\program",
+  "sourceCommit": "a6281479abf4e991c760fec4b66bbea1d98637ac",
+  "msvc": "D:\\program\\BuildTools2022",
+  "cmake": "D:\\program\\tools\\cmake-3.31.10-windows-x86_64\\bin\\cmake.exe",
+  "ninja": "D:\\program\\tools\\ninja\\ninja.exe",
+  "qt": "D:\\program\\Qt\\6.9.3\\msvc2022_64",
+  "vcpkg": "D:\\program\\vcpkg",
+  "python": "D:\\program\\Python312\\python.exe",
+  "aqt": "D:\\program\\tools\\aqt-python",
+  "wix": "D:\\program\\tools\\wix\\wix.exe",
+  "environment": "D:\\program\\environment.ps1",
+  "source": "D:\\program\\synergy\\src\\synergy",
+  "macTarget": "Intel x86_64 / macOS 14",
+  "macBuildStatus": "complete; DMG integrity, x86_64 architecture, ad-hoc signature, GUI and Core version commands verified on macOS 14.8.9",
+  "vcpkgCommit": "d5ec528843d29e3a52d745a64b469f810b2cedbf",
+  "vcpkgToolVersion": "2025-02-11",
+  "pkgconf": "D:\\program\\tools\\pkgconf\\mingw64\\bin\\pkgconf.exe"
+}

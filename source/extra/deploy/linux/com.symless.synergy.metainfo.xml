@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-FileCopyrightText: (C) 2012 - 2026 Synergy App Ltd -->
+<!-- SPDX-License-Identifier: CC0-1.0 -->
+<component type="desktop-application">
+	<id>com.symless.synergy</id>
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>GPL-2.0-only</project_license>
+	<name>Synergy</name>
+	<developer id="com.symless">
+		<name>Synergy App Ltd</name>
+	</developer>
+	<summary>Share one keyboard and mouse between computers</summary>
+	<description>
+		<p>
+			Use the keyboard, mouse, or trackpad of one computer to control nearby computers, and work
+			seamlessly between them.
+		</p>
+	</description>
+	<launchable type="desktop-id">com.symless.synergy.desktop</launchable>
+	<url type="homepage">https://symless.com/synergy</url>
+	<provides>
+		<id>com.symless.synergy.desktop</id>
+	</provides>
+	<categories>
+		<category>Utility</category>
+	</categories>
+	<keywords>
+		<keyword>Input</keyword>
+		<keyword>Sharing</keyword>
+		<keyword translate="no">KVM</keyword>
+	</keywords>
+	<branding>
+		<color type="primary" scheme_preference="light">#dddddd</color>
+		<color type="primary" scheme_preference="dark">#555555</color>
+	</branding>
+	<content_rating type="oars-1.0" />
+	<releases>
+		<release version="1.22.2" date="2026-10-12" urgency="medium">
+			<description>
+				<p>
+					A TLS and packaging release. Upgrading from 1.20 now keeps the server's certificate and
+					the computers it trusts, so nothing has to be paired again, and there are new packages
+					for Rocky Linux 10, Fedora 45 and openSUSE Leap 16.
+				</p>
+				<ul>
+					<li>Upgrading from 1.20 keeps the TLS certificate and the trusted fingerprints, so a
+						server keeps its identity and a client still trusts its server.</li>
+					<li>Changing a TLS setting, or choosing an existing certificate file in Settings, no
+						longer replaces the certificate.</li>
+					<li>A client refused for having no TLS certificate is now named in a message, rather
+						than silently failing to connect.</li>
+					<li>The status bar no longer sticks on connecting while the core is connected, and the
+						fingerprint prompt no longer goes missing when the GUI starts before the core.</li>
+					<li>New packages for Rocky Linux 10, Fedora 45, openSUSE Leap 16 and openSUSE
+						Tumbleweed on arm64; Fedora 42, which reached end of life, is no longer built.</li>
+					<li>The downloads page now offers Linux Mint 22, Pop!_OS 24.04, Raspberry Pi OS and
+						CachyOS the package that fits them.</li>
+					<li>The log view stays where you scroll it instead of jumping to the bottom on every
+						new line.</li>
+					<li>Various macOS and Windows fixes and improvements.</li>
+				</ul>
+				<p>See the release notes for the full changelog.</p>
+			</description>
+			<url>https://symless.com/synergy/download</url>
+		</release>
+		<release version="1.22.1" date="2026-10-03" urgency="medium">
+			<description>
+				<p>
+					A keyboard fix. AltGr works on Windows clients again, after the 1.21 releases stopped
+					it typing symbols such as @, { and } on layouts that need it.
+				</p>
+				<ul>
+					<li>AltGr typed on a Linux server reaches a Windows client again when that client's
+						screen maps AltGr to Alt, the usual workaround for Linux servers.</li>
+					<li>Various Windows fixes and improvements.</li>
+				</ul>
+				<p>See the release notes for the full changelog.</p>
+			</description>
+			<url>https://symless.com/synergy/download</url>
+		</release>
+		<release version="1.22.0" date="2026-09-28" urgency="medium">
+			<description>
+				<p>
+					A clipboard release. Large clipboards no longer hold up the mouse, images travel as PNG
+					or JPEG files rather than raw pixels, and the clipboard size limit goes up to 128 MB.
+				</p>
+				<ul>
+					<li>Copying something large no longer makes the cursor stutter or freeze as it moves to
+						another computer: the clipboard is sent in small pieces behind your input.</li>
+					<li>The clipboard size limit is now 128 MB, as a new setting; a limit saved by an
+						earlier version is not carried over.</li>
+					<li>The status bar shows when a clipboard is being sent or received, and warns when one
+						is too large to share instead of saying nothing.</li>
+					<li>On Wayland, a copy made on another computer now pastes on a Wayland server; JPEG,
+						HTML and other formats are shared; large images paste into Qt apps; and a server no
+						longer re-sends an unchanged clipboard on every switch.</li>
+					<li>On X11, shared images are offered as PNG and JPEG, so modern apps can paste them.</li>
+					<li>GIF, SVG, RTF, WebP and TIFF are shared unchanged.</li>
+					<li>A client no longer drops a healthy connection while it receives a large
+						clipboard.</li>
+					<li>Timers such as the switch delay measure below a second again.</li>
+					<li>Various macOS and Windows fixes and improvements.</li>
+				</ul>
+				<p>See the release notes for the full changelog.</p>
+			</description>
+			<url>https://symless.com/synergy/download</url>
+		</release>
+		<release version="1.21.4" date="2026-09-27" urgency="medium">
+			<description>
+				<p>
+					A clipboard fix. Since 1.21.2 a client dropped its connection whenever the server sent it
+					a clipboard over 3 MB, however high the server's limit was set; it now accepts clipboards
+					up to that limit.
+				</p>
+				<ul>
+					<li>A client accepts clipboards up to the limit set on its server, instead of refusing
+						anything over 3 MB and disconnecting.</li>
+					<li>Upgrading from 1.20 keeps the beta update channel, instead of moving it back to
+						stable.</li>
+					<li>The status bar no longer sticks on connecting after the warning that a client with
+						the same name is already connected.</li>
+				</ul>
+				<p>See the release notes for the full changelog.</p>
+			</description>
+			<url>https://symless.com/synergy/download</url>
+		</release>
+		<release version="1.21.3" date="2026-09-23" urgency="medium">
+			<description>
+				<p>
+					An upgrade fix. Upgrading from 1.20 or older lost the server's screen layout and every
+					setting kept for all users; both now come across, and a machine that has already
+					upgraded gets its screen layout back from the backup that upgrade took.
+				</p>
+				<ul>
+					<li>The server's screen layout, per-screen options, hotkeys and switch settings survive
+						an upgrade from 1.20 or older.</li>
+					<li>Settings kept for all users on 1.20 are carried across instead of being replaced by
+						the defaults.</li>
+					<li>A machine that already upgraded to 1.21.0, 1.21.1 or 1.21.2 has its screen layout
+						restored, unless a new one has been set up since.</li>
+					<li>Various macOS and Windows fixes and improvements.</li>
+				</ul>
+				<p>See the release notes for the full changelog.</p>
+			</description>
+			<url>https://symless.com/synergy/download</url>
+		</release>
+		<release version="1.21.2" date="2026-09-22" urgency="medium">
+			<description>
+				<p>
+					A security and Wayland release. It closes four advisories, makes hotkeys and the cursor
+					behave on a Wayland server, and repairs upgrading from 1.20 or older, which could arrive
+					with the settings, the serial key and the log level reset.
+				</p>
+				<ul>
+					<li>CVE-2026-63409: an odd-length DSOP options vector caused an out-of-bounds read in the
+						client.</li>
+					<li>CVE-2026-65832: an unauthenticated, server-controlled out-of-bounds read in
+						modifier-table indexing.</li>
+					<li>CVE-2026-65976: a clipboard receiver could accumulate data beyond the configured
+						clipboard size limit.</li>
+					<li>GHSA-vxgx-6p4m-fv83: a single-byte LSYN language payload caused an uncaught exception
+						in the client.</li>
+					<li>Further memory-safety hardening in clipboard handling.</li>
+					<li>Hotkeys now work on a Wayland server, through the GlobalShortcuts portal, and the
+						portal permission prompt no longer reappears on every start, after sleep, or when the
+						display wakes.</li>
+					<li>Many cursor fixes on Wayland, covering multi-monitor edges, input capture that never
+						engaged, screen switches during a drag, and the cursor jumping when the compositor
+						renegotiates input devices.</li>
+					<li>Scroll wheels that send small deltas are no longer ignored.</li>
+					<li>Keyboard fixes for the numpad on Wayland, keys left stuck on an X11 client when its
+						keyboard map refreshes, and modifier keys left stuck after crossing screens.</li>
+					<li>Administrators can apply a locked settings file at launch again.</li>
+					<li>Settings, the serial key and the log level now survive an upgrade from 1.20 or
+						older.</li>
+					<li>The Flatpak build no longer reports itself as a beta development build.</li>
+					<li>Various macOS and Windows fixes and improvements.</li>
+				</ul>
+				<p>See the release notes for the full changelog.</p>
+			</description>
+			<url>https://symless.com/synergy/download</url>
+		</release>
+		<release version="1.21.1" date="2026-06-22" urgency="medium">
+			<description>
+				<p>
+					A maintenance release for the 1.21 line, whose main addition is clipboard sharing on
+					Wayland.
+				</p>
+				<ul>
+					<li>Clipboard sharing now works on Wayland, using the desktop portals.</li>
+					<li>The version shown in the interface no longer repeats the commit hash.</li>
+				</ul>
+				<p>See the release notes for the full changelog.</p>
+			</description>
+			<url>https://symless.com/synergy/download</url>
+		</release>
+		<release version="1.21.0" date="2026-06-02" urgency="medium">
+			<description>
+				<p>
+					This release folds a large number of upstream improvements into Synergy from Deskflow,
+					much of it built by the Synergy team and contributed upstream.
+				</p>
+				<p>Stronger security</p>
+				<ul>
+					<li>CVE-2021-42072: the client's identity was not sufficiently verified when it
+						connected.</li>
+					<li>CVE-2021-42073: an attacker could enter an active session state.</li>
+					<li>CVE-2021-42074: an attacker could cause a segmentation fault in the server
+						component.</li>
+					<li>CVE-2021-42075: the server did not correctly close file descriptors for established
+						TCP connections.</li>
+					<li>CVE-2021-42076: an attacker could exhaust memory in the server and client components
+						by sending long TCP messages.</li>
+					<li>TLS fingerprints are now kept in a fingerprint database, with a clearer comparison
+						dialog that shows both the local and remote prints side by side.</li>
+					<li>A new option for servers to require a client certificate before accepting a
+						connection.</li>
+				</ul>
+				<p>Reliability</p>
+				<ul>
+					<li>The app now connects to the running core process over a dedicated IPC channel and
+						receives status updates directly, instead of inferring the connection state by parsing
+						log output.</li>
+					<li>Only one copy of the core runs at a time, so duplicate instances no longer fight over
+						the connection.</li>
+					<li>On Windows, clipboard changes are tracked with a modern format-listener API for more
+						reliable clipboard sharing.</li>
+				</ul>
+				<p>Features and interface</p>
+				<ul>
+					<li>A single combined core binary replaces the separate client and server processes.</li>
+					<li>A hotkey to cycle through computers, and an option to start with the cursor locked
+						to the current computer.</li>
+					<li>An option to show the version in the window title.</li>
+					<li>The server address can be a list of host names or IP addresses, with a more accurate
+						suggested address that updates as the network changes.</li>
+					<li>A new client configuration dialog, a searchable log you can dock and hide, millisecond
+						timestamps, and a refreshed about dialog and status area.</li>
+					<li>A setting to choose the network protocol (Synergy or Barrier) for compatibility with
+						different clients.</li>
+					<li>Live interface translation without restarting, with Spanish, Italian, Japanese,
+						Chinese (simplified), Korean, and Russian added.</li>
+					<li>Mono or colorful tray icons with matching light and dark icon themes.</li>
+					<li>A new scroll scaling option replaces the old scroll-speed setting.</li>
+					<li>On Linux, server and client configuration honors XDG_CONFIG_HOME.</li>
+				</ul>
+				<p>See the release notes for the full changelog.</p>
+			</description>
+			<url>https://symless.com/synergy/download</url>
+		</release>
+	</releases>
+</component>

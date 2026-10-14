@@ -1,0 +1,5 @@
+set(_notices "D:/program/synergy/third-party-notices")
+if(NOT EXISTS "${_notices}/OpenSSL-copyright.txt")
+  message(FATAL_ERROR "Third-party license notices are missing")
+endif()
+file(COPY "${_notices}" DESTINATION "${CPACK_TEMPORARY_INSTALL_DIRECTORY}")
