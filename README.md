@@ -1,12 +1,16 @@
-# Synergy 1 Local Build
+# Synergy 1 Builds
 
-Unofficial self-built Synergy 1 GUI packages for Windows 11 x64 and Intel macOS.
+Unofficial Synergy 1 builds for Windows x64 and Intel macOS.
+
+**[Download Windows MSI / portable ZIP and Intel Mac DMG from Releases](https://github.com/yosm1/synergy1-builds/releases).**
+Windows 和 Intel Mac 安装包请前往 [Releases](https://github.com/yosm1/synergy1-builds/releases) 下载。
+
 Not the full Synergy 3 commercial client. No official support is included.
 
 ## Downloads
 
-Open this repository's Releases page for the Windows MSI, Intel Mac DMG,
-Windows portable ZIP, matching source ZIP and SHA256SUMS.txt.
+See [Releases](https://github.com/yosm1/synergy1-builds/releases) for installers,
+the matching source ZIP and SHA256SUMS.txt.
 macOS 14.8.9 is the tested Mac runtime. Windows portable mode omits the service
 and cannot control the login screen or UAC secure desktop.
 
